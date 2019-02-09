@@ -1,8 +1,10 @@
 package com.example.qr_readerexample;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -79,8 +81,12 @@ public class DecoderActivity extends AppCompatActivity
   // "text" : the text encoded in QR
   // "points" : points where QR control points are placed
   @Override public void onQRCodeRead(String text, PointF[] points) {
-    resultTextView.setText(text);
-    pointsOverlayView.setPoints(points);
+
+    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(text));
+    startActivity(browserIntent);
+    return;
+//    resultTextView.setText(text);
+//    pointsOverlayView.setPoints(points);
   }
 
   private void requestCameraPermission() {
